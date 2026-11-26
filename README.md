@@ -1,31 +1,31 @@
-# Glide for Android — public source preview
+# Glide — personal Android source
 
-A personal Android launcher and media interface with a typography-led Metro-inspired design, local media controls, an accessory connection card and deterministic photo enhancement/comparison.
+A typography-led launcher/media interface for the owner's LG G6. This branch is code only. No public APK or store release is being made, and the installed 1.11 app remains unchanged.
 
-This is a source preview, not a stable public APK. No neural image restoration, audio denoiser or local language model is included. The installed personal-device build remains separate and unchanged.
+## Original fonts preserved
 
-## Existing 1.11 work
+Original Zegoe resource references are retained. Restricted font binaries stay out of public Git. Supply your own licensed local files to compile, as described in [FONT_SETUP.md](FONT_SETUP.md). The build checks for them explicitly and never silently replaces them. Bundled Selawik/OFL assets remain available without changing the personal font choices.
 
-- Generic Bluetooth A2DP and wired-output recognition, reconnect/duplicate handling, motion-aware connection illustrations and explicitly simulated preview. Connected output availability is not proof of the active music route.
-- Single-photo Original/Enhanced comparison with a bounded 768-pixel original preview and save-copy output up to 2048 pixels. Three-frame deterministic alignment/median stacking remains capped at 1600 pixels. This is not neural restoration.
-- Existing launcher, library, Now Playing, playlists, themes and optional network features remain in the source. No 20% responsiveness, battery-life or universal frame-rate improvement is claimed.
+## Implemented
 
-## Build
+- Existing local library/Now Playing, playback controls, themes, Bluetooth/wired handling and explicitly simulated accessory preview.
+- Existing deterministic photo enhancement, Original/Enhanced comparison and save-copy workflow; single-photo limit 2048 px, burst limit 1600 px.
+- New **small-mark pixel repair**: select a mark in the preview and repair a copy up to 1024 px. It uses neighbouring pixels and works best on plain backgrounds. Originals remain untouched. Cancellation and previous-preview preservation use the existing workflow. It is not neural inpainting or semantic reconstruction.
 
-Minimum Android API 28 (Android 9). The recorded environment uses Android Gradle Plugin 9.5.1, Gradle 9.6.0, compile/target SDK 37 and Android Studio JBR 25. See `gradle/libs.versions.toml` and the wrapper for exact pins. Configure your installed SDK through Android Studio or a local, untracked `local.properties` file.
+## Phone-only AI request
+
+No model is integrated. Question answering, neural enhancement, transcription and image generation remain unimplemented. See [docs/PHONE_ONLY_AI.md](docs/PHONE_ONLY_AI.md). There is no laptop/cloud backend and no fake generation or chatbot button.
+
+## Verification
+
+Companion private preview: 1.12.0-private-preview / 11008. Release assembly, signing verification and 27 direct JUnit tests passed with zero failures/skips; lint has zero errors. All nine original font binaries are unchanged in that private build. [BUILD_VERIFICATION.json](BUILD_VERIFICATION.json) records pending checks. The new repair has not passed device interaction/quality/performance acceptance. No speedup or AI-deployment claim is made.
+
+## Build and licence
+
+Minimum Android 9 / API 28; compile/target SDK 37, pinned Gradle 9.6.0 and Android Gradle Plugin 9.5.1. Configure your own SDK and licensed fonts locally. Public source is unsigned; never commit keys or assume a differently signed build updates the owner's installed app.
 
 ```powershell
 ./gradlew.bat --no-configuration-cache '-Dorg.gradle.jvmargs=-Xmx2048m --add-opens=java.base/java.util=ALL-UNNAMED' '-Pkotlin.compiler.execution.strategy=in-process' :app:testDebugUnitTest :app:lintDebug :app:assembleRelease
 ```
 
-Use `--offline` only when required dependencies are cached. The release configuration is deliberately **unsigned**. Set up your own release signing locally; never commit keys or passwords. Do not install an unsigned artifact or assume a differently signed public build can update the existing personal-device installation. This repository does not generate or rotate signing keys.
-
-## Licensing and privacy
-
-Public typography uses the already-bundled OFL-licensed Selawik fonts. Restricted Zegoe binaries and personal Git history are excluded from this clean snapshot. Original code is MIT; dictionary content is separately CC BY-SA 4.0. See `THIRD_PARTY_NOTICES.md`, `PRIVACY.md` and `SOURCE_PROVENANCE.json`.
-
-No owner photos, screenshots, APK backups, device dumps, credentials or application-only contact details are included. Optional network features have external providers and must not be described as offline. Review provider terms and supply your own keys where required.
-
-## Verification limits
-
-The private predecessor passed 22 host unit tests and an owner-controlled install. Those observations do not verify public-font layout or a separately signed public binary. See `BUILD_VERIFICATION.json` for this source preview's actual build checks when available. Known-model Bluetooth and the owner photo-comparison response remained untested in the predecessor's final record. Device instrumentation, cold-launch/library-ready timing and reliable controlled performance gains are unverified.
+Original code is MIT. Dictionary content is separately CC BY-SA 4.0; fonts/dependencies retain their notices. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), [PRIVACY.md](PRIVACY.md), and [SOURCE_PROVENANCE.json](SOURCE_PROVENANCE.json). No owner media, device reports, keys or restricted font binaries are published.

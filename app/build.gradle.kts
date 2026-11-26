@@ -13,15 +13,15 @@ android {
         applicationId = "com.gharaudio.launcher"
         minSdk = 28
         targetSdk = 37
-        versionCode = 11007
-        versionName = "1.11.0-public-preview"
+        versionCode = 11008
+        versionName = "1.12.0-private-preview"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            signingConfig = null // Public source preview is unsigned; configure a dedicated release identity locally.
+            signingConfig = null // Code-only export; configure signing locally. Personal installed key is unchanged.
             optimization {
                 enable = true
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
@@ -57,4 +57,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+// Restricted personal font binaries stay local and are never substituted automatically.
+tasks.named("preBuild").configure {
+    doFirst {
+        val missing = listOf("zegoe_light.ttf", "zegoe_regular.ttf", "zegoe_semibold.ttf", "zegoe_bold.ttf")
+            .filterNot { layout.projectDirectory.file("src/main/res/font/$it").asFile.isFile }
+        check(missing.isEmpty()) { "Provide your own licensed local Zegoe fonts; see FONT_SETUP.md. Missing: $missing" }
+    }
 }

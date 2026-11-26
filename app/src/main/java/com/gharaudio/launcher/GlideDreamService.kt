@@ -56,8 +56,8 @@ class GlideDreamService : DreamService() {
     }
 
     // L: Zune HD dock look — Zegoe type, OLED black, accent details, slow drift against burn-in
-    private val zLight by lazy { runCatching { androidx.core.content.res.ResourcesCompat.getFont(this, R.font.selawik_light) }.getOrNull() ?: Typeface.DEFAULT }
-    private val zRegular by lazy { runCatching { androidx.core.content.res.ResourcesCompat.getFont(this, R.font.selawik_regular) }.getOrNull() ?: Typeface.DEFAULT }
+    private val zLight by lazy { runCatching { androidx.core.content.res.ResourcesCompat.getFont(this, R.font.zegoe_light) }.getOrNull() ?: Typeface.DEFAULT }
+    private val zRegular by lazy { runCatching { androidx.core.content.res.ResourcesCompat.getFont(this, R.font.zegoe_regular) }.getOrNull() ?: Typeface.DEFAULT }
     private var root: View? = null
     private val drift = object : Runnable {
         override fun run() {

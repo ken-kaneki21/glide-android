@@ -1,18 +1,20 @@
 {
-  "release_assembly": "PASS_UNSIGNED",
+  "private_companion_commit": "8fcf06f31e3caf844d01e2a2779e4203dcace748",
+  "private_companion_assembly": "PASS, with original locally supplied fonts",
   "direct_junit": {
-    "tests": 22,
+    "tests": 27,
     "failures": 0,
     "skipped": 0
   },
-  "normal_gradle_test_worker": "NOT_RUN_ON_THIS_PUBLIC_SNAPSHOT: managed loopback restriction; direct JUnit used",
-  "lint_errors": 0,
-  "lint_warnings": 121,
-  "lint_hints": 2,
-  "public_font_device_layout": "UNVERIFIED",
-  "production_signing": "NOT_CONFIGURED",
-  "ai_models": "NONE",
-  "raw_device_reports_in_public_source": false,
-  "restricted_zegoe_binaries": false,
-  "private_predecessor": "c59b3b1bff5af5ca1ad45465024e99b4d986727f"
+  "lint": {
+    "errors": 0,
+    "warnings": 126,
+    "hints": 2
+  },
+  "normal_host_gradle_test": "PENDING_FOR_1_12",
+  "phone_installation": "NOT_PERFORMED_FOR_1_12",
+  "public_clone_build": "Requires owners own licensed font assets; see FONT_SETUP.md",
+  "ai_models_integrated": 0,
+  "neural_features": "NOT_IMPLEMENTED",
+  "new_feature": "Non-neural small-mark pixel repair"
 }

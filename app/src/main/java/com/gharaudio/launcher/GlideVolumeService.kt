@@ -165,8 +165,8 @@ class GlideVolumeService : AccessibilityService() {
 @SuppressLint("ViewConstructor")
 private class ZuneVolumeView(context: Context, private val onButton: (String) -> Unit) : View(context) {
     private val d = resources.displayMetrics.density
-    private val regular: Typeface = runCatching { ResourcesCompat.getFont(context, R.font.selawik_regular) }.getOrNull() ?: Typeface.DEFAULT
-    private val bold: Typeface = runCatching { ResourcesCompat.getFont(context, R.font.selawik_bold) }.getOrNull() ?: Typeface.DEFAULT_BOLD
+    private val regular: Typeface = runCatching { ResourcesCompat.getFont(context, R.font.zegoe_regular) }.getOrNull() ?: Typeface.DEFAULT
+    private val bold: Typeface = runCatching { ResourcesCompat.getFont(context, R.font.zegoe_bold) }.getOrNull() ?: Typeface.DEFAULT_BOLD
     private val p = Paint(Paint.ANTI_ALIAS_FLAG)
     var title = ""; var artist = ""; var playing = false; var level = 0; var max = 15; var accent = 0xFFD80073.toInt()
     private val prev = RectF(); private val play = RectF(); private val next = RectF()

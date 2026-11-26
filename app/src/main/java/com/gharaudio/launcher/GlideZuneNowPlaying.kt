@@ -70,16 +70,16 @@ import java.util.Locale
  * v1.11 Phase 1, step 1: Zune / Metro 2020 Now Playing.
  * Visual reference: Saurabh's "Metro 2020 series" screenshots (Madelena's MusicBee Zune skin).
  * Original Compose implementation; no files from the skin are used.
- * Public-source typography: OFL-licensed Selawik; personal-device Zegoe binaries excluded.
+ * Personal-device typography: Zegoe UI via Zune.family; Selawik resources remain available.
  */
 
 internal object Zune {
     val family = FontFamily(
-        Font(R.font.selawik_light, FontWeight.Light),
-        Font(R.font.selawik_light, FontWeight(350)),
-        Font(R.font.selawik_regular, FontWeight.Normal),
-        Font(R.font.selawik_semibold, FontWeight.SemiBold),
-        Font(R.font.selawik_bold, FontWeight.Bold)
+        Font(R.font.zegoe_light, FontWeight.Light),
+        Font(R.font.zegoe_light, FontWeight(350)),
+        Font(R.font.zegoe_regular, FontWeight.Normal),
+        Font(R.font.zegoe_semibold, FontWeight.SemiBold),
+        Font(R.font.zegoe_bold, FontWeight.Bold)
     )
     val Semilight = FontWeight(350)
     // Theme step: text colours follow the dark / light background

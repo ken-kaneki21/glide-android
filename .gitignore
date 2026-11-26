@@ -36,3 +36,7 @@ artifacts/
 *.aab
 *.bundle
 *.zip
+
+# Preserve personal typography; restricted font binaries remain local.
+app/src/main/res/font/zegoe_*.ttf
+app/src/main/res/font/zegoe_*.otf

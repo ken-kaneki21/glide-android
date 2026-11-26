@@ -77,6 +77,28 @@ internal fun createOriginalPhotoPreview(bitmap: Bitmap): Bitmap {
     }
 }
 
+private suspend fun repairPhotoMark(current:Bitmap, original:Bitmap?, point:Pair<Int,Int>):PhotoResult {
+    val job=currentCoroutineContext()
+    val scale=minOf(1.0,1024.0/maxOf(current.width,current.height))
+    val width=(current.width*scale).toInt().coerceAtLeast(1)
+    val height=(current.height*scale).toInt().coerceAtLeast(1)
+    val working=if(scale<1.0)Bitmap.createScaledBitmap(current,width,height,true) else current
+    val pixels=IntArray(width*height)
+    try {working.getPixels(pixels,0,width,0,0,width,height)}
+    finally {if(working!==current)working.recycle()}
+    val radius=(minOf(32,maxOf(1,minOf(current.width,current.height)/40))*scale).toInt().coerceAtLeast(1)
+    val repaired=repairSmallPhotoMark(pixels,width,height,(point.first*scale).toInt().coerceIn(0,width-1),
+        (point.second*scale).toInt().coerceIn(0,height-1),radius){job.ensureActive()}
+    val result=Bitmap.createBitmap(repaired,width,height,Bitmap.Config.ARGB_8888)
+    var before:Bitmap?=null
+    try {
+        job.ensureActive()
+        before=original?.copy(Bitmap.Config.ARGB_8888,false)
+        job.ensureActive()
+        return PhotoResult(result,"Small mark repaired locally. Review edges before saving a copy, up to 1024 px.",before)
+    }catch(failure:Throwable){result.recycle();before?.recycle();throw failure}
+}
+
 private fun luminanceGrid(bitmap: Bitmap, width: Int, height: Int): IntArray {
     val preview = Bitmap.createScaledBitmap(bitmap, width, height, true)
     val pixels = IntArray(width * height)
@@ -169,6 +191,8 @@ internal fun GlidePhotoEnhance(onClose: () -> Unit) {
     var image by remember { mutableStateOf<Bitmap?>(null) }
     var originalPreview by remember { mutableStateOf<Bitmap?>(null) }
     var showOriginal by remember { mutableStateOf(false) }
+    var selectingMark by remember { mutableStateOf(false) }
+    var selectedMark by remember { mutableStateOf<Pair<Int,Int>?>(null) }
     var busy by remember { mutableStateOf(false) }
     var status by remember { mutableStateOf("Choose a photo to lift shadows and save an enhanced copy up to 2048 px.") }
     var capturePath by rememberSaveable { mutableStateOf<String?>(null) }
@@ -191,6 +215,8 @@ internal fun GlidePhotoEnhance(onClose: () -> Unit) {
                     image = ready.bitmap
                     originalPreview = ready.originalPreview
                     showOriginal = false
+                    selectingMark = false
+                    selectedMark = null
                     status = ready.message
                     completed = null // UI owns it; old UI images are released by GC, never recycled while drawn.
                 }
@@ -337,11 +363,12 @@ internal fun GlidePhotoEnhance(onClose: () -> Unit) {
         text = {
             Column(Modifier.verticalScroll(rememberScrollState())) {
                 val visible = if (showOriginal) originalPreview ?: image else image
-                visible?.let { Image(it.asImageBitmap(), if (showOriginal) "Original photo preview" else "Enhanced photo preview",
-                    Modifier.fillMaxWidth().height(220.dp)) }
+                visible?.let { GlidePhotoRepairPreview(it,
+                    if(showOriginal) "Original photo preview" else "Enhanced photo preview",
+                    selectingMark && !showOriginal && !busy && !documentPending,selectedMark){selectedMark=it} }
                 if (originalPreview != null) {
                     Row(Modifier.fillMaxWidth()) {
-                        TextButton(enabled = !busy && !documentPending, onClick = { showOriginal = true }) {
+                        TextButton(enabled = !busy && !documentPending, onClick = { showOriginal = true; selectingMark=false; selectedMark=null }) {
                             Text(if (showOriginal) "Original • selected" else "Original")
                         }
                         TextButton(enabled = !busy && !documentPending, onClick = { showOriginal = false }) {
@@ -349,6 +376,16 @@ internal fun GlidePhotoEnhance(onClose: () -> Unit) {
                         }
                     }
                     Text("Save copy always exports Enhanced. Original preview is limited to 768 px.")
+                    Row(Modifier.fillMaxWidth()) {
+                        TextButton(enabled=!busy && !documentPending,onClick={showOriginal=false;selectingMark=!selectingMark;selectedMark=null}) {
+                            Text(if(selectingMark) "Cancel mark selection" else "Select small mark")
+                        }
+                        TextButton(enabled=!busy && !documentPending && selectedMark!=null,onClick={
+                            val current=image;val before=originalPreview;val point=selectedMark
+                            if(current!=null && point!=null)runPhotoWork{repairPhotoMark(current,before,point)}
+                        }) {Text("Repair mark")}
+                    }
+                    if(selectingMark)Text("Tap a small mark. Simple pixel repair works best on plain backgrounds; repair copies are limited to 1024 px.")
                 }
                 Text(if (busy) "Processing…" else status)
                 if (busy && work != null) TextButton(onClick = { work?.cancel() }) { Text("Cancel processing") }
