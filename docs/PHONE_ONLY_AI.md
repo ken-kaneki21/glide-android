@@ -15,3 +15,7 @@ The managed implementation environment lacks Android NDK/CMake and an inference 
 Future model work must pin code and weight licences/hashes, remain within the existing acquisition budget, load one model on demand, preserve originals, allow cancellation and benchmark actual G6 peak PSS, cold/warm latency, thermal behavior and playback continuity. Tiny weight files do not prove tiny runtime memory. No claim of AI deployment or full feature completion is supported by this branch.
 
 Sources: https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct ; https://github.com/ggml-org/whisper.cpp ; https://github.com/ggml-org/llama.cpp/blob/master/docs/android.md ; https://github.com/leejet/stable-diffusion.cpp
+
+## Automated closeout, 26 November 2026
+
+The earlier code-only update was pushed by the owner to draft PR #1. Follow-up tests and accurate dependency/device dispositions are in [AUTOMATED_PHOTO_CLOSEOUT.md](AUTOMATED_PHOTO_CLOSEOUT.md). No transcription UI, runtime or model was integrated. Original personal fonts and the exact 11008 private APK remain unchanged.

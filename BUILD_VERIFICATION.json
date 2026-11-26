@@ -16,5 +16,21 @@
   "public_clone_build": "Requires owners own licensed font assets; see FONT_SETUP.md",
   "ai_models_integrated": 0,
   "neural_features": "NOT_IMPLEMENTED",
-  "new_feature": "Non-neural small-mark pixel repair"
+  "new_feature": "Non-neural small-mark pixel repair",
+  "automated_photo_closeout": {
+    "direct_junit_tests": 37,
+    "failures": 0,
+    "skipped": 0,
+    "normal_gradle_27_test_host_result": "PASS_REUSED",
+    "normal_gradle_37_tests": "NOT_EXECUTED_HERE",
+    "instrumentation_methods_compiled": 7,
+    "instrumentation_executed": false,
+    "lint_errors": 0,
+    "lint_warnings": 126,
+    "lint_hints": 2,
+    "lint_issue_delta": 0,
+    "production_source_changed": false,
+    "transcription": "BLOCKED_NOT_IMPLEMENTED",
+    "private_test_commit": "901263c597c35d8bdf55982f5e6267e61f2ccecd"
+  }
 }
