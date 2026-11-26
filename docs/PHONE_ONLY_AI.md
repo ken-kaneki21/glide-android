@@ -1,21 +1,15 @@
-# Phone-only local AI: actual status
+# Phone-only AI: current source status
 
-Target: the owner's LG G6 / Android 9, with no laptop inference service, cloud inference or paid API. This is a source branch, not an all-in-one AI release.
+Target: LG G6 H870DS / Android 9. No laptop inference server, cloud fallback or paid API.
 
-| Requested function | Current implementation / disposition |
+| Request | Actual disposition |
 |---|---|
-| Answer questions | NOT IMPLEMENTED. A very small SmolLM2-class model is a candidate for basic English prompts, with substantial factual/reasoning limits. No language-model runtime or weights are integrated |
-| Enhance/edit photos | Existing deterministic shadow enhancement, Original/Enhanced preview and save-copy workflow retained. No neural enhancement model is integrated |
-| Remove things from photos | IMPLEMENTED only as bounded small-mark pixel repair on a copy up to 1024 px. Best on simple backgrounds. It is non-neural and does not reconstruct missing semantic content |
-| Transcribe audio | NOT IMPLEMENTED. Whisper Tiny is a candidate; upstream lists about 75 MiB on disk and approximately 273 MB runtime memory, not measured on this G6. No speech runtime or weights are integrated |
-| Generate images | NOT IMPLEMENTED. No useful low-memory prompt-based image generator has passed a G6 feasibility/memory/latency gate. No placeholder, procedural drawing or remote generation is presented as neural generation |
+| Question answering | NOT IMPLEMENTED |
+| Neural photo enhancement | NOT IMPLEMENTED; deterministic enhancement remains |
+| Semantic object removal | NOT IMPLEMENTED; bounded non-neural small-mark repair remains |
+| Audio transcription | IMPLEMENTED IN PRIVATE PREVIEW CODE using Vosk 0.3.75 and a separately imported pinned English model. WAV PCM16 only, up to 30 seconds. Android native execution, real-speech accuracy, latency/RAM and UI behavior remain UNVERIFIED |
+| Image generation | NOT IMPLEMENTED |
 
-The managed implementation environment lacks Android NDK/CMake and an inference runtime. Model acquisition failed DNS resolution for huggingface.co. Those are execution blockers; a phone can be an inference target while the laptop is still required to compile its app. No model downloads, SDK upgrade, GPU rental, network backend or paid service was used.
+The owner-host acquisition completed: 55,205,151 received bytes including runtime/model metadata. Weights are not bundled, tracked or automatically downloaded by the app. The prebuilt runtime avoids an NDK requirement for this integration. AAR ABI/minimum-SDK compatibility was inspected; that does not prove G6 CPU/runtime success. No model inference was executed in the managed environment, which cannot reach ADB and has no emulator image.
 
-Future model work must pin code and weight licences/hashes, remain within the existing acquisition budget, load one model on demand, preserve originals, allow cancellation and benchmark actual G6 peak PSS, cold/warm latency, thermal behavior and playback continuity. Tiny weight files do not prove tiny runtime memory. No claim of AI deployment or full feature completion is supported by this branch.
-
-Sources: https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct ; https://github.com/ggml-org/whisper.cpp ; https://github.com/ggml-org/llama.cpp/blob/master/docs/android.md ; https://github.com/leejet/stable-diffusion.cpp
-
-## Automated closeout, 26 November 2026
-
-The earlier code-only update was pushed by the owner to draft PR #1. Follow-up tests and accurate dependency/device dispositions are in [AUTOMATED_PHOTO_CLOSEOUT.md](AUTOMATED_PHOTO_CLOSEOUT.md). No transcription UI, runtime or model was integrated. Original personal fonts and the exact 11008 private APK remain unchanged.
+See [OFFLINE_TRANSCRIPTION.md](OFFLINE_TRANSCRIPTION.md) for hashes, licences, input limits, cancellation/resource handling and acceptance gaps. Source integration and successful JVM/model-integrity tests must not be described as production deployment or measured recognition quality.

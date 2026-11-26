@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -13,15 +15,17 @@ android {
         applicationId = "com.gharaudio.launcher"
         minSdk = 28
         targetSdk = 37
-        versionCode = 11008
-        versionName = "1.12.0-private-preview"
+        versionCode = 11009
+        versionName = "1.12.1-transcription-preview"
+        ndk { abiFilters += listOf("arm64-v8a") } // Verified LG G6 ABI; no NDK build is required.
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            signingConfig = null // Code-only export; configure signing locally. Personal installed key is unchanged.
+            signingConfig = null // Public code only; configure signing locally. Original personal key is unchanged.
+            proguardFiles("speech-proguard.pro")
             optimization {
                 enable = true
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
@@ -37,7 +41,26 @@ android {
     }
 }
 
+val speechInputs = providers.gradleProperty("glideSpeechInputs").orNull
+    ?: error("Set -PglideSpeechInputs to the verified local Vosk/JNA AAR directory; weights are imported separately.")
+tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
+    systemProperty("glideSpeechModelFixture", file("$speechInputs/vosk-model-small-en-us-0.15.zip").absolutePath)
+}
+fun verifiedSpeechAar(name: String, expected: String): File {
+    val artifact = file("$speechInputs/$name")
+    check(artifact.isFile) { "Missing speech runtime: $name" }
+    val digest = MessageDigest.getInstance("SHA-256")
+    artifact.inputStream().use { stream ->
+        val bytes = ByteArray(65536)
+        while (true) { val n = stream.read(bytes); if (n < 0) break; digest.update(bytes, 0, n) }
+    }
+    check(digest.digest().joinToString("") { "%02x".format(it.toInt() and 255) } == expected) { "Speech runtime SHA-256 mismatch: $name" }
+    return artifact
+}
+
 dependencies {
+    implementation(files(verifiedSpeechAar("vosk-android-0.3.75.aar", "ab2f8b91ac8051561aa325546b35fed9a68b36b8121bac5c6fb927525c4adfad")))
+    implementation(files(verifiedSpeechAar("jna-5.18.1.aar", "7f053e3ec99e14dd71259c82c1c8a02738d64a13c31226b2acc170f3060951e0")))
     implementation("androidx.media3:media3-exoplayer:1.10.1")
     implementation("androidx.media3:media3-session:1.10.1")
     implementation("org.osmdroid:osmdroid-android:6.1.20")

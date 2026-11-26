@@ -29,3 +29,9 @@ Minimum Android 9 / API 28; compile/target SDK 37, pinned Gradle 9.6.0 and Andro
 ```
 
 Original code is MIT. Dictionary content is separately CC BY-SA 4.0; fonts/dependencies retain their notices. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), [PRIVACY.md](PRIVACY.md), and [SOURCE_PROVENANCE.json](SOURCE_PROVENANCE.json). No owner media, device reports, keys or restricted font binaries are published.
+
+## Offline transcription source preview
+
+The continuation adds a bounded English PCM16 WAV transcription dialog using verified, locally supplied Vosk/JNA runtimes. Models are imported separately and never bundled. This is a private candidate, not a device-validated release; see [limits and verification](docs/OFFLINE_TRANSCRIPTION.md). No public APK is supplied.
+
+Build/test with the pinned local dependency directory: `gradle -PglideSpeechInputs=PATH_TO_LOCAL_INPUTS :app:testDebugUnitTest :app:lintDebug :app:assembleRelease`. The directory must contain the two exact AARs and the exact model ZIP listed in the document; normal unit tests validate the real archive. Also supply your own licensed local fonts per FONT_SETUP.md. No dependency/model is downloaded automatically.

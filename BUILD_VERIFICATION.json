@@ -1,36 +1,27 @@
 {
-  "private_companion_commit": "8fcf06f31e3caf844d01e2a2779e4203dcace748",
-  "private_companion_assembly": "PASS, with original locally supplied fonts",
-  "direct_junit": {
-    "tests": 27,
-    "failures": 0,
-    "skipped": 0
-  },
+  "private_companion_commit": "a9d10191f64b793ca35ec7ba10c40016bd387722",
+  "version": "1.12.1-transcription-preview",
+  "version_code": 11009,
+  "target_abi": "arm64-v8a",
+  "private_companion_assembly": "PASS",
+  "direct_jvm_tests": 53,
+  "failures": 0,
+  "skipped": 0,
+  "normal_host_gradle_tests": "PENDING_FOR_TRANSCRIPTION; prior 37-test version passed on owner host",
+  "instrumentation_methods_compiled": 7,
+  "instrumentation_executed": false,
+  "native_inference_executed": false,
+  "speech_accuracy_latency_memory": "UNVERIFIED",
   "lint": {
     "errors": 0,
-    "warnings": 126,
-    "hints": 2
+    "warnings": 127,
+    "hints": 2,
+    "new_warning": "ChromeOsAbiSupport: ARM64-only personal G6 preview does not target ChromeOS"
   },
-  "normal_host_gradle_test": "PENDING_FOR_1_12",
-  "phone_installation": "NOT_PERFORMED_FOR_1_12",
-  "public_clone_build": "Requires owners own licensed font assets; see FONT_SETUP.md",
-  "ai_models_integrated": 0,
-  "neural_features": "NOT_IMPLEMENTED",
-  "new_feature": "Non-neural small-mark pixel repair",
-  "automated_photo_closeout": {
-    "direct_junit_tests": 37,
-    "failures": 0,
-    "skipped": 0,
-    "normal_gradle_27_test_host_result": "PASS_REUSED",
-    "normal_gradle_37_tests": "NOT_EXECUTED_HERE",
-    "instrumentation_methods_compiled": 7,
-    "instrumentation_executed": false,
-    "lint_errors": 0,
-    "lint_warnings": 126,
-    "lint_hints": 2,
-    "lint_issue_delta": 0,
-    "production_source_changed": false,
-    "transcription": "BLOCKED_NOT_IMPLEMENTED",
-    "private_test_commit": "901263c597c35d8bdf55982f5e6267e61f2ccecd"
-  }
+  "apk_sha256": "d5956de4c179a72b5cd3359d50d8d155dfe1be65d28cb300c7a9144f54dfa7b3",
+  "public_apk_published": false,
+  "model_weights_bundled": false,
+  "speech_runtime_integrated": true,
+  "other_neural_requests": "NOT_IMPLEMENTED",
+  "public_build": "Requires pinned local AARs, model ZIP for tests and own licensed local fonts; release export unsigned"
 }
