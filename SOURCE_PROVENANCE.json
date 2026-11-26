@@ -1,0 +1,27 @@
+{
+  "kind": "clean public source snapshot; no private Git history",
+  "derived_from_private_commit": "c59b3b1bff5af5ca1ad45465024e99b4d986727f",
+  "excluded": [
+    "UPGRADE_NOTES.md",
+    "app/src/main/res/font/zegoe_bold.ttf",
+    "app/src/main/res/font/zegoe_light.ttf",
+    "app/src/main/res/font/zegoe_regular.ttf",
+    "app/src/main/res/font/zegoe_semibold.ttf"
+  ],
+  "font_reference_changes": [
+    "app/src/main/java/com/gharaudio/launcher/GlideDreamService.kt",
+    "app/src/main/java/com/gharaudio/launcher/GlideKeyboard.kt",
+    "app/src/main/java/com/gharaudio/launcher/GlideVolumeService.kt",
+    "app/src/main/java/com/gharaudio/launcher/GlideZuneNowPlaying.kt"
+  ],
+  "signing": "unsigned release configuration; no key generated or changed",
+  "private_apk_and_installed_app_changed": false,
+  "version": "1.11.0-public-preview",
+  "version_code": 11007,
+  "licensing": "Personal source MIT; Selawik OFL-1.1; adapted dictionary CC-BY-SA-4.0; dependencies and wrapper retain upstream licences",
+  "limitations": [
+    "Public font layout requires separate device review.",
+    "Private owner checks do not validate the unsigned public build.",
+    "No AI model included."
+  ]
+}

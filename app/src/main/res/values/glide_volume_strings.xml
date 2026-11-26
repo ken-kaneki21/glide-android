@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="glide_volume_label">Glide volume</string>
+    <string name="glide_volume_description">Shows the Zune volume and music controls instead of the LG volume panel while music plays. Glide only listens to the volume keys; it reads nothing on screen and sends nothing anywhere.</string>
+</resources>

@@ -1,0 +1,18 @@
+{
+  "release_assembly": "PASS_UNSIGNED",
+  "direct_junit": {
+    "tests": 22,
+    "failures": 0,
+    "skipped": 0
+  },
+  "normal_gradle_test_worker": "NOT_RUN_ON_THIS_PUBLIC_SNAPSHOT: managed loopback restriction; direct JUnit used",
+  "lint_errors": 0,
+  "lint_warnings": 121,
+  "lint_hints": 2,
+  "public_font_device_layout": "UNVERIFIED",
+  "production_signing": "NOT_CONFIGURED",
+  "ai_models": "NONE",
+  "raw_device_reports_in_public_source": false,
+  "restricted_zegoe_binaries": false,
+  "private_predecessor": "c59b3b1bff5af5ca1ad45465024e99b4d986727f"
+}

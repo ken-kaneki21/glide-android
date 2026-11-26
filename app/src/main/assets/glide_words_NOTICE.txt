@@ -1,0 +1,8 @@
+Glide keyboard dictionary: filtered top 30,000 English entries derived from hermitdave/FrequencyWords, OpenSubtitles 2018 English word-frequency content. The local adaptation filters entries and retains word-frequency data for keyboard suggestions.
+
+Content authors/source: Hermit Dave / FrequencyWords contributors and the OpenSubtitles/OPUS source corpus.
+https://github.com/hermitdave/FrequencyWords
+https://opus.nlpl.eu/OpenSubtitles2018.php
+Content and this adapted dictionary: CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/
+Legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode.en
+No endorsement is implied. The content is not relicensed under the app code licence. Upstream generator code is separately MIT (Copyright 2016 Hermit Dave); it is not included as app code here. Preserve this notice with redistribution of the dictionary.

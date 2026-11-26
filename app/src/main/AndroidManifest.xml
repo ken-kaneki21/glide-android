@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <queries>
+        <intent><action android:name="android.media.action.IMAGE_CAPTURE" /></intent>
+        <package android:name="com.lge.music" />
+        <package android:name="com.maxmpz.audioplayer" />
+        <package android:name="com.lge.hifirecorder" />
+        <package android:name="com.pittvandewitt.wavelet" />
+        <package android:name="com.companyname.andriodapp1" />
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="org.breezyweather" />
+        <package android:name="org.mozilla.fennec_fdroid" />
+        <package android:name="com.aurora.store" />
+        <package android:name="com.looker.droidify" />
+    </queries>
+
+        <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/glide_launcher_icon"
+        android:label="Glide"
+        android:roundIcon="@drawable/glide_launcher_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GharAudio">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.photo"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/glide_photo_paths" />
+        </provider>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.GharAudio"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Home is selectable, never automatically set during installation. -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".PlaybackListenerService"
+            android:label="Ghar Audio music controls"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+            <activity
+            android:name=".GlideAmbientActivity"
+            android:exported="false"
+            android:showWhenLocked="true"
+            android:theme="@style/Theme.GharAudio" />
+        <service
+            android:name=".GlideDreamService"
+            android:label="Glide Dock"
+            android:exported="true"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+            </intent-filter>
+            <meta-data android:name="android.service.dream"
+                android:resource="@xml/glide_dream" />
+        </service>
+    <!-- K1: Glide Zune keyboard. Enable in Settings > Language & input; LG keyboard stays installed. -->
+        <service
+            android:name=".GlideKeyboardService"
+            android:label="Glide keyboard"
+            android:permission="android.permission.BIND_INPUT_METHOD"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data android:name="android.view.im" android:resource="@xml/glide_method" />
+        </service>
+            <service
+            android:name=".GlideVolumeService"
+            android:label="@string/glide_volume_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/glide_volume_service" />
+        </service>
+            <activity
+            android:name=".GlideLockActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.gharaudio.launcher.lock"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.GharAudio"
+            android:exported="false" />
+    <service
+            android:name=".GlideEngineService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
+    <activity
+            android:name=".GlidePlayActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter android:label="Glide">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:mimeType="audio/*" />
+                <data android:scheme="file" android:mimeType="audio/*" />
+            </intent-filter>
+        </activity>
+    </application></manifest>

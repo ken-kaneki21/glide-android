@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- v1.10e 0.4: dark window so app start and lock view never flash white. -->
+    <style name="Theme.GharAudio" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/glide_ink</item>
+        <item name="android:colorBackground">@color/glide_ink</item>
+        <item name="android:statusBarColor">@color/glide_ink</item>
+        <item name="android:navigationBarColor">@color/glide_ink</item>
+    </style>
+</resources>
