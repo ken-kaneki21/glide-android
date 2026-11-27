@@ -8,7 +8,7 @@ The model ZIP is size/hash checked before extraction. Extraction stays within a 
 
 Only one import/transcription runs at a time across dialog lifetimes. File work is off the main thread; decoding and recognition run off the main thread. Cancellation is checked during reads, hashes and between recognition chunks. Native model load/recognizer calls are not forcibly interrupted: cancellation completes when the current native call returns. Closing the dialog cancels its scope, and `use` closes the recognizer/model. The runtime shared library can remain loaded by Android; that is separate from model resource ownership.
 
-The displayed model-load timing covers the Model constructor only. Recognition timing covers recognizer feed/finalization; neither is end-to-end latency or a RAM measurement. Initial archive verification/import, WAV decode and model-file verification add time. No timing or accuracy result from the LG G6 has been collected.
+The displayed model-load timing covers the Model constructor only. Recognition timing covers recognizer feed/finalization; neither is end-to-end latency or a RAM measurement. Initial archive verification/import, WAV decode and model-file verification add time. An isolated debug G6 harness has now passed a single four-word fixture three times: median end-to-end 3,559 ms; maximum sampled PSS 194,420 KiB. These are not release-app performance or general accuracy results.
 
 ## Exact dependencies
 
@@ -36,7 +36,7 @@ The existing 37 tests are retained. New tests cover PCM decode, clipping limits,
 
 The existing seven Android instrumentation methods concern photo/bitmap behavior. They do not establish speech recognition correctness. Normal host Gradle results, direct JVM results, assembly, signature verification and lint are recorded separately in the manifest/reports.
 
-Managed ADB access is unavailable and no emulator image is installed. No app update, synthetic fixture push, UI action, recording, or permission grant is performed. **The installed daily-use app remains unchanged.**
+Managed ADB access is unavailable and no emulator image is installed. No app update, synthetic fixture push, UI action, recording, or permission grant is performed. **Historical managed-session statement: the later owner-host run installed the exact 11009 candidate and passed six app transcription checks.**
 
 Outstanding gates: actual model import and JNI execution on Android, a fixed openly licensed speech recording with verified reference transcript, WER with documented normalization, repeated model-load/end-to-end timing, sampled process memory, silence/noise behavior in the recognizer, UI picker/cancellation/reopening, and playback coexistence. No real-speech fixture or transcription-quality result is fabricated. This is implementation plus automated preprocessing/model-integrity verification, not stable device acceptance.
 
@@ -45,3 +45,7 @@ The private host runner performs normal Gradle tests and lint and can publish th
 ## Recovery
 
 Existing 11007/11008 APKs, reports and source worktrees are retained. Candidate 11009 uses the same package and certificate. It is not installed automatically. Android downgrade rules still apply; do not uninstall, clear data or force a downgrade. A later recovery build must use the same signing identity and a compatible greater version code. Private source bundles contain personal font history and must never be uploaded publicly. The public bundle contains sanitized source history only.
+
+## Current owner-host acceptance update - 27 November 2026
+
+Normal Gradle tests passed: 53, zero failures/skips. The owner installed the exact candidate, then passed model import, short-fixture transcription, invalid-input preservation, picker cancellation, processing cancellation and dialog close/reopen. The isolated harness separately recognized licensed speech and silence. Photo comparison/export, repaired pixels, broad accuracy, active-playback coexistence and controlled performance gains remain unverified. Earlier pending statements above describe historical checkpoints, not current results. See DEVICE_VERIFICATION_11009.json and ../RELEASE_STATUS.md.

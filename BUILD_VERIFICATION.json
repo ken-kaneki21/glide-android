@@ -7,11 +7,15 @@
   "direct_jvm_tests": 53,
   "failures": 0,
   "skipped": 0,
-  "normal_host_gradle_tests": "PENDING_FOR_TRANSCRIPTION; prior 37-test version passed on owner host",
+  "normal_host_gradle_tests": {
+    "passed": 53,
+    "failures": 0,
+    "skipped": 0
+  },
   "instrumentation_methods_compiled": 7,
   "instrumentation_executed": false,
-  "native_inference_executed": false,
-  "speech_accuracy_latency_memory": "UNVERIFIED",
+  "native_inference_executed": "PASS_ISOLATED_G6_DEBUG_HARNESS_SINGLE_FIXTURE",
+  "speech_accuracy_latency_memory": "Limited fixture measurements exist; broad accuracy and release-app performance remain UNVERIFIED",
   "lint": {
     "errors": 0,
     "warnings": 127,
@@ -23,5 +27,8 @@
   "model_weights_bundled": false,
   "speech_runtime_integrated": true,
   "other_neural_requests": "NOT_IMPLEMENTED",
-  "public_build": "Requires pinned local AARs, model ZIP for tests and own licensed local fonts; release export unsigned"
+  "public_build": "Requires pinned local AARs, model ZIP for tests and own licensed local fonts; release export unsigned",
+  "actual_app_transcription_checks": "Six checks passed; see docs/DEVICE_VERIFICATION_11009.json",
+  "photo_export_acceptance": "UNVERIFIED",
+  "release_status": "PRIVATE_INSTALLED_CANDIDATE_PARTIAL_APP_CHECKS"
 }
