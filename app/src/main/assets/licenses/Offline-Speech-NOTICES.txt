@@ -1,0 +1,18 @@
+Offline transcription runtime and model provenance
+
+Vosk API 0.3.75, Alpha Cephei Inc. — Apache License 2.0.
+Source: https://github.com/alphacep/vosk-api
+License text: Vosk-Apache-2.0.txt in this directory.
+
+Java Native Access (JNA) 5.18.1 — Apache-2.0 OR LGPL-2.1-or-later.
+This integration selects the Apache-2.0 option.
+Source: https://github.com/java-native-access/jna
+Original embedded declaration: JNA-LICENSE.txt in this directory.
+Native dependencies and their upstream notices must be retained in any redistributed runtime build.
+
+English model: vosk-model-small-en-us-0.15, Apache-2.0 according to the upstream model table.
+Source and license declaration: https://alphacephei.com/vosk/models
+The model is not bundled. The user imports the exact verified ZIP separately.
+
+No speech recordings, personal transcripts or model weights are included in the app source.
+This is a private preview. Public source publication does not authorize distribution of personal fonts or signing material.

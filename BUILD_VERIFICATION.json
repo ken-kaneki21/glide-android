@@ -1,18 +1,34 @@
 {
-  "release_assembly": "PASS_UNSIGNED",
-  "direct_junit": {
-    "tests": 22,
+  "private_companion_commit": "a9d10191f64b793ca35ec7ba10c40016bd387722",
+  "version": "1.12.1-transcription-preview",
+  "version_code": 11009,
+  "target_abi": "arm64-v8a",
+  "private_companion_assembly": "PASS",
+  "direct_jvm_tests": 53,
+  "failures": 0,
+  "skipped": 0,
+  "normal_host_gradle_tests": {
+    "passed": 53,
     "failures": 0,
     "skipped": 0
   },
-  "normal_gradle_test_worker": "NOT_RUN_ON_THIS_PUBLIC_SNAPSHOT: managed loopback restriction; direct JUnit used",
-  "lint_errors": 0,
-  "lint_warnings": 121,
-  "lint_hints": 2,
-  "public_font_device_layout": "UNVERIFIED",
-  "production_signing": "NOT_CONFIGURED",
-  "ai_models": "NONE",
-  "raw_device_reports_in_public_source": false,
-  "restricted_zegoe_binaries": false,
-  "private_predecessor": "c59b3b1bff5af5ca1ad45465024e99b4d986727f"
+  "instrumentation_methods_compiled": 7,
+  "instrumentation_executed": false,
+  "native_inference_executed": "PASS_ISOLATED_G6_DEBUG_HARNESS_SINGLE_FIXTURE",
+  "speech_accuracy_latency_memory": "Limited fixture measurements exist; broad accuracy and release-app performance remain UNVERIFIED",
+  "lint": {
+    "errors": 0,
+    "warnings": 127,
+    "hints": 2,
+    "new_warning": "ChromeOsAbiSupport: ARM64-only personal G6 preview does not target ChromeOS"
+  },
+  "apk_sha256": "d5956de4c179a72b5cd3359d50d8d155dfe1be65d28cb300c7a9144f54dfa7b3",
+  "public_apk_published": false,
+  "model_weights_bundled": false,
+  "speech_runtime_integrated": true,
+  "other_neural_requests": "NOT_IMPLEMENTED",
+  "public_build": "Requires pinned local AARs, model ZIP for tests and own licensed local fonts; release export unsigned",
+  "actual_app_transcription_checks": "Six checks passed; see docs/DEVICE_VERIFICATION_11009.json",
+  "photo_export_acceptance": "UNVERIFIED",
+  "release_status": "PRIVATE_INSTALLED_CANDIDATE_PARTIAL_APP_CHECKS"
 }

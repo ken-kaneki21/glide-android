@@ -1722,6 +1722,9 @@ private fun GharSettings(
         var enhancePhoto by remember { mutableStateOf(false) }
         ZuneSettingsAction("enhance photo", "lift shadows and save a local copy") { enhancePhoto = true }
         if (enhancePhoto) GlidePhotoEnhance(onClose = { enhancePhoto = false })
+        var offlineSpeech by remember { mutableStateOf(false) }
+        ZuneSettingsAction("offline transcription", "English WAV clips, processed on this phone") { offlineSpeech = true }
+        if (offlineSpeech) GlideOfflineSpeech(onClose = { offlineSpeech = false })
         ZuneSettingsAction("copy diagnostics", "copy app, device and audio output details") {
             val info = context.packageManager.getPackageInfo(context.packageName, 0)
             val audio = context.getSystemService(android.media.AudioManager::class.java)

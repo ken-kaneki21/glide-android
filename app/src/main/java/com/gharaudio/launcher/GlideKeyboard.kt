@@ -415,8 +415,8 @@ class GlideKeyboardService : InputMethodService() {
 @SuppressLint("ViewConstructor")
 private class GlideKeyboardView(private val ime: GlideKeyboardService) : View(ime) {
     private val d = resources.displayMetrics.density
-    private val font: Typeface = try { ResourcesCompat.getFont(ime, R.font.selawik_regular) ?: Typeface.DEFAULT } catch (_: Exception) { Typeface.DEFAULT }
-    private val fontLight: Typeface = try { ResourcesCompat.getFont(ime, R.font.selawik_light) ?: font } catch (_: Exception) { font }
+    private val font: Typeface = try { ResourcesCompat.getFont(ime, R.font.zegoe_regular) ?: Typeface.DEFAULT } catch (_: Exception) { Typeface.DEFAULT }
+    private val fontLight: Typeface = try { ResourcesCompat.getFont(ime, R.font.zegoe_light) ?: font } catch (_: Exception) { font }
 
     private val keyColor = 0xFF262626.toInt() // F3: Zune HD / WP7 key grey
     private val funcColor = 0xFF1A1A1A.toInt()

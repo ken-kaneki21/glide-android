@@ -1,0 +1,33 @@
+{
+  "candidate_sha256": "d5956de4c179a72b5cd3359d50d8d155dfe1be65d28cb300c7a9144f54dfa7b3",
+  "version_code": 11009,
+  "status": "PRIVATE_CANDIDATE_UPDATED_PARTIAL_APP_CHECKS",
+  "app_ui_checks": {
+    "model_picker_import": "PASS",
+    "app_fixture_transcription": "PASS_SINGLE_FIXTURE",
+    "invalid_input_prior_result": "PASS",
+    "picker_cancellation": "PASS",
+    "processing_cancellation": "PASS",
+    "close_reopen": "PASS",
+    "photo_small_mark_repair": "UNVERIFIED_EXPORTED_PIXELS",
+    "photo_original_preview": "UNVERIFIED_ACCESSIBILITY_STATE",
+    "photo_toggle_and_enhanced_save": "UNVERIFIED_EXPORT_NOT_ATTEMPTED"
+  },
+  "scope": "Licensed four-word fixture and failure/lifecycle checks; not broad accuracy or production capacity",
+  "earlier_native_harness": {
+    "wer": [
+      0,
+      0,
+      0
+    ],
+    "median_end_to_end_ms": 3559,
+    "sampled_max_pss_kib": 194420
+  },
+  "optimization": "Existing ARM64-only package retained; no additional latency/RAM gain claimed",
+  "remaining": [
+    "Real accessory hardware, natural-photo quality and active-playback coexistence remain unverified.",
+    "UI automation is functional verification; its polling is not a controlled latency benchmark.",
+    "No additional speed or RAM improvement is claimed from this run.",
+    "Photo toggle/export state was not observable through bounded accessibility automation; no photo acceptance claimed."
+  ]
+}

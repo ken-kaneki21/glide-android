@@ -1,31 +1,30 @@
-# Glide for Android — public source preview
+# Glide - personal Android source
 
-A personal Android launcher and media interface with a typography-led Metro-inspired design, local media controls, an accessory connection card and deterministic photo enhancement/comparison.
+A typography-led launcher and media interface for the owner's LG G6. Public source is available; no public APK is supplied. The installed private companion is **1.12.1-transcription-preview / 11009**, with partial app verification. It is not a fully accepted stable release.
 
-This is a source preview, not a stable public APK. No neural image restoration, audio denoiser or local language model is included. The installed personal-device build remains separate and unchanged.
+## Implemented
 
-## Existing 1.11 work
+- Local music library, Now Playing, queue, playback controls, themes, wired/Bluetooth connection handling and an explicitly simulated connection-animation preview.
+- Deterministic single-photo enhancement and Original/Enhanced comparison, with save-copy output. Single-photo processing is limited to 2048 px; burst processing to 1600 px.
+- Bounded small-mark pixel repair on a copy up to 1024 px, using surrounding pixels. It is not neural inpainting or semantic object reconstruction. Device export/pixel acceptance remains unverified.
+- Offline English transcription through Vosk 0.3.75 and a separately imported, hash-pinned model. Inputs are PCM16 WAV files, mono/stereo, 8-48 kHz, up to 30 seconds and 8 MiB. No microphone recording, cloud inference, background listening or transcript telemetry is added.
 
-- Generic Bluetooth A2DP and wired-output recognition, reconnect/duplicate handling, motion-aware connection illustrations and explicitly simulated preview. Connected output availability is not proof of the active music route.
-- Single-photo Original/Enhanced comparison with a bounded 768-pixel original preview and save-copy output up to 2048 pixels. Three-frame deterministic alignment/median stacking remains capped at 1600 pixels. This is not neural restoration.
-- Existing launcher, library, Now Playing, playlists, themes and optional network features remain in the source. No 20% responsiveness, battery-life or universal frame-rate improvement is claimed.
+Question answering, neural enhancement, semantic object removal and image generation are not implemented. See [phone-only AI status](docs/PHONE_ONLY_AI.md).
 
-## Build
+## Verification and limits
 
-Minimum Android API 28 (Android 9). The recorded environment uses Android Gradle Plugin 9.5.1, Gradle 9.6.0, compile/target SDK 37 and Android Studio JBR 25. See `gradle/libs.versions.toml` and the wrapper for exact pins. Configure your installed SDK through Android Studio or a local, untracked `local.properties` file.
+The owner-host private companion passed 53 normal Gradle unit tests, zero failures/skips, release assembly and signing verification. Lint recorded zero errors, 127 warnings and two hints. Seven Android instrumentation methods compiled; they were not executed.
 
-```powershell
-./gradlew.bat --no-configuration-cache '-Dorg.gradle.jvmargs=-Xmx2048m --add-opens=java.base/java.util=ALL-UNNAMED' '-Pkotlin.compiler.execution.strategy=in-process' :app:testDebugUnitTest :app:lintDebug :app:assembleRelease
-```
+An isolated debug harness on the LG G6 recognized one licensed four-word fixture exactly in three repeated loads. Median end-to-end time was 3,559 ms for 2.78625 seconds of audio; maximum sampled PSS was 194,420 KiB. This does not establish broad accuracy, real-time performance or release-app latency. The actual installed app passed model import, short-fixture transcription, invalid-input preservation, picker cancellation, processing cancellation and dialog close/reopen.
 
-Use `--offline` only when required dependencies are cached. The release configuration is deliberately **unsigned**. Set up your own release signing locally; never commit keys or passwords. Do not install an unsigned artifact or assume a differently signed public build can update the existing personal-device installation. This repository does not generate or rotate signing keys.
+Photo toggle/export and repaired-pixel acceptance remain **UNVERIFIED** because bounded accessibility automation could not observe the required state. Real accessory coverage, natural-photo quality, active-playback coexistence and controlled performance gains also remain unverified. No further speed/RAM improvement is claimed. See [device verification](docs/DEVICE_VERIFICATION_11009.json) and [release status](RELEASE_STATUS.md).
 
-## Licensing and privacy
+## Build and personal fonts
 
-Public typography uses the already-bundled OFL-licensed Selawik fonts. Restricted Zegoe binaries and personal Git history are excluded from this clean snapshot. Original code is MIT; dictionary content is separately CC BY-SA 4.0. See `THIRD_PARTY_NOTICES.md`, `PRIVACY.md` and `SOURCE_PROVENANCE.json`.
+Android 9/API 28 minimum; compile/target SDK 37; Gradle 9.6.0 and Android Gradle Plugin 9.5.1. Use the pinned local Vosk/JNA AARs and model ZIP described in [offline transcription](docs/OFFLINE_TRANSCRIPTION.md). The model is required by integrity tests but is never bundled or downloaded automatically.
 
-No owner photos, screenshots, APK backups, device dumps, credentials or application-only contact details are included. Optional network features have external providers and must not be described as offline. Review provider terms and supply your own keys where required.
+The owner's Zegoe resource references are preserved. Restricted font binaries stay out of Git. Supply your own licensed local files per [FONT_SETUP.md](FONT_SETUP.md); the build checks for them and never silently substitutes another font. Public source is unsigned. Configure signing locally; a differently signed build cannot update the owner's installed app.
 
-## Verification limits
+Use the existing documented Gradle tasks with --no-configuration-cache, --add-opens=java.base/java.util=ALL-UNNAMED on the Gradle JVM, -Pkotlin.compiler.execution.strategy=in-process and -PglideSpeechInputs pointing to the verified local input directory: :app:testDebugUnitTest :app:lintDebug :app:assembleRelease.
 
-The private predecessor passed 22 host unit tests and an owner-controlled install. Those observations do not verify public-font layout or a separately signed public binary. See `BUILD_VERIFICATION.json` for this source preview's actual build checks when available. Known-model Bluetooth and the owner photo-comparison response remained untested in the predecessor's final record. Device instrumentation, cold-launch/library-ready timing and reliable controlled performance gains are unverified.
+Original code is MIT. Dictionary content is separately CC BY-SA 4.0; dependencies and fonts retain their own notices. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [PRIVACY.md](PRIVACY.md). Keys, weights, runtime AARs, private media, restricted fonts and private Git history are excluded.
